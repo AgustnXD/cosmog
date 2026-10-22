@@ -1,0 +1,42 @@
+{
+  "music.cosmog": {
+    "sounds": [
+      {
+        "name": "cosmog:the_cosmog",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.cosmog": {
+    "sounds": [
+      {
+        "name": "cosmog:the_cosmog",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.starfall": {
+    "sounds": [
+      {
+        "name": "cosmog:starfall",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.nebula": {
+    "sounds": [
+      {
+        "name": "cosmog:nebula",
+        "stream": true
+      }
+    ]
+  },
+  "music_disc.event_horizon": {
+    "sounds": [
+      {
+        "name": "cosmog:event_horizon",
+        "stream": true
+      }
+    ]
+  }
+}
