@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "SIS",
+    "IHI",
+    "SIS"
+  ],
+  "key": {
+    "S": {
+      "item": "cosmog:stardust_shard"
+    },
+    "I": {
+      "item": "cosmog:astral_ingot"
+    },
+    "H": {
+      "item": "cosmog:star_heart"
+    }
+  },
+  "result": {
+    "item": "cosmog:nova_heart",
+    "count": 1
+  }
+}

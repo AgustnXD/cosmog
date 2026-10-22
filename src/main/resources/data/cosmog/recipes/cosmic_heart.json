@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " C ",
+    "IHI",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "cosmog:cosmic_core"
+    },
+    "I": {
+      "item": "cosmog:astral_ingot"
+    },
+    "H": {
+      "item": "cosmog:nova_heart"
+    }
+  },
+  "result": {
+    "item": "cosmog:cosmic_heart",
+    "count": 1
+  }
+}

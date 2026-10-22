@@ -1,0 +1,55 @@
+{
+  "has_precipitation": false,
+  "temperature": 0.5,
+  "downfall": 0.0,
+  "effects": {
+    "fog_color": 725808,
+    "sky_color": 461598,
+    "water_color": 7000319,
+    "water_fog_color": 1780316,
+    "grass_color": 2776134,
+    "foliage_color": 2776134,
+    "particle": {
+      "probability": 0.004,
+      "options": {
+        "type": "minecraft:end_rod"
+      }
+    },
+    "music": {
+      "sound": "cosmog:music.cosmog",
+      "min_delay": 400,
+      "max_delay": 2400,
+      "replace_current_music": true
+    }
+  },
+  "carvers": {},
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "cosmog:stardust_ore"
+    ],
+    [],
+    [],
+    [
+      "cosmog:starbloom_patch",
+      "minecraft:patch_grass_plain"
+    ],
+    []
+  ]
+}
