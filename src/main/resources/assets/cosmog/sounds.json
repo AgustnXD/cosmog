@@ -7,6 +7,22 @@
       }
     ]
   },
+  "music.umbra": {
+    "sounds": [
+      {
+        "name": "cosmog:umbra_1",
+        "stream": true
+      },
+      {
+        "name": "cosmog:umbra_2",
+        "stream": true
+      },
+      {
+        "name": "cosmog:umbra_3",
+        "stream": true
+      }
+    ]
+  },
   "music_disc.cosmog": {
     "sounds": [
       {
@@ -36,6 +52,76 @@
       {
         "name": "cosmog:event_horizon",
         "stream": true
+      }
+    ]
+  },
+  "regulator_ambient": {
+    "sounds": [
+      {
+        "name": "cosmog:regulator_ambient"
+      }
+    ]
+  },
+  "regulator_hurt": {
+    "sounds": [
+      {
+        "name": "cosmog:regulator_hurt"
+      }
+    ]
+  },
+  "regulator_death": {
+    "sounds": [
+      {
+        "name": "cosmog:regulator_death"
+      }
+    ]
+  },
+  "regulator_pulse": {
+    "sounds": [
+      {
+        "name": "cosmog:regulator_pulse"
+      }
+    ]
+  },
+  "anti_ambient": {
+    "sounds": [
+      {
+        "name": "cosmog:anti_ambient"
+      }
+    ]
+  },
+  "anti_hurt": {
+    "sounds": [
+      {
+        "name": "cosmog:anti_hurt"
+      }
+    ]
+  },
+  "anti_death": {
+    "sounds": [
+      {
+        "name": "cosmog:anti_death"
+      }
+    ]
+  },
+  "anti_pulse": {
+    "sounds": [
+      {
+        "name": "cosmog:anti_pulse"
+      }
+    ]
+  },
+  "stalker_ambient": {
+    "sounds": [
+      {
+        "name": "cosmog:stalker_ambient"
+      }
+    ]
+  },
+  "screamer_scream": {
+    "sounds": [
+      {
+        "name": "cosmog:screamer_scream"
       }
     ]
   }
