@@ -2,6 +2,8 @@ package com.cosmog.registry;
 
 import com.cosmog.CosmogMod;
 import com.cosmog.block.CosmicGatewayBlock;
+import com.cosmog.block.HiddenCacheBlock;
+import com.cosmog.block.UmbraGatewayBlock;
 import com.cosmog.block.StarbloomBlock;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
@@ -33,4 +35,23 @@ public class ModBlocks {
     public static final RegistryObject<Block> COSMIC_GATEWAY = BLOCKS.register("cosmic_gateway",
             () -> new CosmicGatewayBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)
                     .strength(8.0F, 1200.0F).lightLevel(s -> 12)));
+
+    // ---- bloques de The Umbra (poolrooms oscuros)
+    public static final RegistryObject<Block> DARK_TILES = BLOCKS.register("dark_tiles",
+            () -> new Block(tileProps()));
+    public static final RegistryObject<Block> DARK_FLOOR_TILES = BLOCKS.register("dark_floor_tiles",
+            () -> new Block(tileProps()));
+    public static final RegistryObject<Block> DIM_LAMP = BLOCKS.register("dim_lamp",
+            () -> new Block(tileProps().lightLevel(s -> 8)));
+    /** Se ve identico a los azulejos oscuros; al clic derecho suelta un poco de comida. */
+    public static final RegistryObject<Block> HIDDEN_CACHE = BLOCKS.register("hidden_cache",
+            () -> new HiddenCacheBlock(tileProps()));
+    public static final RegistryObject<Block> UMBRA_GATEWAY = BLOCKS.register("umbra_gateway",
+            () -> new UmbraGatewayBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)
+                    .strength(8.0F, 1200.0F).lightLevel(s -> 7)));
+
+    private static BlockBehaviour.Properties tileProps() {
+        return BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY).strength(2.0F, 6.0F)
+                .requiresCorrectToolForDrops().sound(SoundType.STONE);
+    }
 }

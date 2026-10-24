@@ -2,7 +2,14 @@ package com.cosmog.registry;
 
 import com.cosmog.CosmogMod;
 import com.cosmog.item.AmuletItem;
+import com.cosmog.item.AdeSoulItem;
 import com.cosmog.item.AstralArmorMaterial;
+import com.cosmog.item.EclipseArmorMaterial;
+import com.cosmog.item.EclipseTier;
+import com.cosmog.item.RiftCompassItem;
+import com.cosmog.item.UmbraKeyItem;
+import com.cosmog.item.VoidArmorMaterial;
+import com.cosmog.item.VoidTier;
 import com.cosmog.item.AstralKeyItem;
 import com.cosmog.item.AstralTier;
 import net.minecraft.world.effect.MobEffects;
@@ -111,4 +118,76 @@ public class ModItems {
             () -> new RecordItem(10, ModSounds.DISC_NEBULA, new Item.Properties().stacksTo(1).rarity(Rarity.RARE), 3360));
     public static final RegistryObject<Item> MUSIC_DISC_EVENT_HORIZON = ITEMS.register("music_disc_event_horizon",
             () -> new RecordItem(9, ModSounds.DISC_EVENT_HORIZON, new Item.Properties().stacksTo(1).rarity(Rarity.EPIC), 3040));
+
+    // ================= THE UMBRA =================
+    public static final RegistryObject<Item> VOID_FRAGMENT = ITEMS.register("void_fragment",
+            () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> DARK_INGOT = ITEMS.register("dark_ingot",
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
+    public static final RegistryObject<Item> CORRUPT_CORE = ITEMS.register("corrupt_core",
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> DARK_ORB = ITEMS.register("dark_orb",
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> ECLIPSE_TEMPLATE = ITEMS.register("eclipse_template",
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> ADE_SOUL = ITEMS.register("ade_soul",
+            () -> new AdeSoulItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> UMBRA_KEY = ITEMS.register("umbra_key",
+            () -> new UmbraKeyItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+    public static final RegistryObject<Item> RIFT_COMPASS = ITEMS.register("rift_compass",
+            () -> new RiftCompassItem(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> VOID_HELMET = ITEMS.register("void_helmet",
+            () -> new ArmorItem(VoidArmorMaterial.INSTANCE, ArmorItem.Type.HELMET, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> VOID_CHESTPLATE = ITEMS.register("void_chestplate",
+            () -> new ArmorItem(VoidArmorMaterial.INSTANCE, ArmorItem.Type.CHESTPLATE, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> VOID_LEGGINGS = ITEMS.register("void_leggings",
+            () -> new ArmorItem(VoidArmorMaterial.INSTANCE, ArmorItem.Type.LEGGINGS, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> VOID_BOOTS = ITEMS.register("void_boots",
+            () -> new ArmorItem(VoidArmorMaterial.INSTANCE, ArmorItem.Type.BOOTS, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> VOID_SWORD = ITEMS.register("void_sword",
+            () -> new SwordItem(VoidTier.INSTANCE, 3, -2.4F, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+
+    // ---- fusion ECLIPSE (Astral + Vacio): el doble de dano / proteccion
+    public static final RegistryObject<Item> ECLIPSE_BLADE = ITEMS.register("eclipse_blade",
+            () -> new SwordItem(EclipseTier.INSTANCE, 3, -2.2F, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> ECLIPSE_HELMET = ITEMS.register("eclipse_helmet",
+            () -> new ArmorItem(EclipseArmorMaterial.INSTANCE, ArmorItem.Type.HELMET, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> ECLIPSE_CHESTPLATE = ITEMS.register("eclipse_chestplate",
+            () -> new ArmorItem(EclipseArmorMaterial.INSTANCE, ArmorItem.Type.CHESTPLATE, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> ECLIPSE_LEGGINGS = ITEMS.register("eclipse_leggings",
+            () -> new ArmorItem(EclipseArmorMaterial.INSTANCE, ArmorItem.Type.LEGGINGS, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> ECLIPSE_BOOTS = ITEMS.register("eclipse_boots",
+            () -> new ArmorItem(EclipseArmorMaterial.INSTANCE, ArmorItem.Type.BOOTS, new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    /** Regeneracion X, Velocidad X, Resistencia III, Absorcion V (+ vision nocturna y resistencia al fuego) */
+    public static final RegistryObject<Item> ECLIPSE_HEART = ITEMS.register("eclipse_heart",
+            () -> new AmuletItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant())
+                    .buff(() -> MobEffects.REGENERATION, 9)
+                    .buff(() -> MobEffects.MOVEMENT_SPEED, 9)
+                    .buff(() -> MobEffects.DAMAGE_RESISTANCE, 2)
+                    .buff(() -> MobEffects.ABSORPTION, 4)
+                    .buff(() -> MobEffects.NIGHT_VISION, 0)
+                    .buff(() -> MobEffects.FIRE_RESISTANCE, 0));
+
+    // ---- bloques de The Umbra
+    public static final RegistryObject<Item> DARK_TILES = ITEMS.register("dark_tiles",
+            () -> new BlockItem(ModBlocks.DARK_TILES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DARK_FLOOR_TILES = ITEMS.register("dark_floor_tiles",
+            () -> new BlockItem(ModBlocks.DARK_FLOOR_TILES.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DIM_LAMP = ITEMS.register("dim_lamp",
+            () -> new BlockItem(ModBlocks.DIM_LAMP.get(), new Item.Properties()));
+    public static final RegistryObject<Item> HIDDEN_CACHE = ITEMS.register("hidden_cache",
+            () -> new BlockItem(ModBlocks.HIDDEN_CACHE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> UMBRA_GATEWAY = ITEMS.register("umbra_gateway",
+            () -> new BlockItem(ModBlocks.UMBRA_GATEWAY.get(), new Item.Properties().rarity(Rarity.RARE)));
+
+    // ---- huevos de prueba
+    public static final RegistryObject<Item> ANTI_REGULATOR_SPAWN_EGG = ITEMS.register("anti_regulator_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.ANTI_REGULATOR, 0xF2F8FF, 0x46E1E6, new Item.Properties()));
+    public static final RegistryObject<Item> ADE_SPAWN_EGG = ITEMS.register("ade_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.ADE, 0xE8EEF8, 0x6ED7F0, new Item.Properties()));
+    public static final RegistryObject<Item> STALKER_SPAWN_EGG = ITEMS.register("stalker_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.STALKER, 0x050505, 0xE8E8F0, new Item.Properties()));
+    public static final RegistryObject<Item> SCREAMER_SPAWN_EGG = ITEMS.register("screamer_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.SCREAMER, 0xBEBEB6, 0x000000, new Item.Properties()));
 }

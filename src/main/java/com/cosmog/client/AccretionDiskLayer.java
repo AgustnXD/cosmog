@@ -1,9 +1,9 @@
 package com.cosmog.client;
 
 import com.cosmog.CosmogMod;
-import com.cosmog.entity.CosmosRegulatorEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -18,19 +18,20 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Mob;
 
-/** Disco de acrecion luminoso que gira alrededor de la cabeza-agujero negro del jefe. */
-public class AccretionDiskLayer extends RenderLayer<CosmosRegulatorEntity, RegulatorModel> {
+/** Disco de acrecion luminoso que gira alrededor de la cabeza-agujero negro. La textura decide el color. */
+public class AccretionDiskLayer<T extends Mob, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
     public static final ModelLayerLocation LAYER =
             new ModelLayerLocation(new ResourceLocation(CosmogMod.MODID, "accretion_disk"), "main");
-    private static final ResourceLocation TEXTURE =
-            new ResourceLocation(CosmogMod.MODID, "textures/entity/accretion_disk.png");
 
     private final ModelPart disk;
+    private final ResourceLocation texture;
 
-    public AccretionDiskLayer(RenderLayerParent<CosmosRegulatorEntity, RegulatorModel> parent, EntityModelSet models) {
+    public AccretionDiskLayer(RenderLayerParent<T, M> parent, EntityModelSet models, ResourceLocation texture) {
         super(parent);
         this.disk = models.bakeLayer(LAYER).getChild("disk");
+        this.texture = texture;
     }
 
     public static LayerDefinition createLayer() {
@@ -42,7 +43,7 @@ public class AccretionDiskLayer extends RenderLayer<CosmosRegulatorEntity, Regul
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, CosmosRegulatorEntity entity,
+    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight, T entity,
                        float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks,
                        float netHeadYaw, float headPitch) {
         if (entity.isInvisible()) {
@@ -50,10 +51,10 @@ public class AccretionDiskLayer extends RenderLayer<CosmosRegulatorEntity, Regul
         }
         poseStack.pushPose();
         this.getParentModel().head.translateAndRotate(poseStack);
-        this.disk.yRot = ageInTicks * 0.04F;   // gira sobre su propio eje
-        this.disk.zRot = -0.32F;               // inclinado como en la imagen
+        this.disk.yRot = ageInTicks * 0.04F;
+        this.disk.zRot = -0.32F;
         this.disk.xRot = 0.12F;
-        VertexConsumer consumer = buffer.getBuffer(RenderType.eyes(TEXTURE));
+        VertexConsumer consumer = buffer.getBuffer(RenderType.eyes(this.texture));
         this.disk.render(poseStack, consumer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
         poseStack.popPose();
     }

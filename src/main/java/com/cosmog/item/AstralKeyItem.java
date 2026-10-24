@@ -1,5 +1,6 @@
 package com.cosmog.item;
 
+import com.cosmog.registry.ModDimensions;
 import com.cosmog.util.CosmogTeleporter;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -27,7 +28,7 @@ public class AstralKeyItem extends Item {
         if (level.isClientSide() || !(player instanceof ServerPlayer sp)) {
             return InteractionResultHolder.success(stack);
         }
-        return CosmogTeleporter.travel(sp)
+        return CosmogTeleporter.travel(sp, ModDimensions.COSMOG)
                 ? InteractionResultHolder.success(stack)
                 : InteractionResultHolder.fail(stack);
     }

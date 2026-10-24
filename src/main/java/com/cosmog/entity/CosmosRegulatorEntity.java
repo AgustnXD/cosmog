@@ -1,5 +1,6 @@
 package com.cosmog.entity;
 
+import com.cosmog.registry.ModSounds;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -82,7 +83,7 @@ public class CosmosRegulatorEntity extends Monster {
         if (!this.enraged && this.getHealth() < this.getMaxHealth() * 0.5F) {
             this.enraged = true;
             this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, Integer.MAX_VALUE, 1, false, false));
-            this.level().playSound(null, this.blockPosition(), SoundEvents.ENDER_DRAGON_GROWL, SoundSource.HOSTILE, 3.0F, 0.7F);
+            this.level().playSound(null, this.blockPosition(), ModSounds.REGULATOR_PULSE.get(), SoundSource.HOSTILE, 3.0F, 0.7F);
         }
 
         LivingEntity target = this.getTarget();
@@ -127,7 +128,7 @@ public class CosmosRegulatorEntity extends Monster {
         }
         server.sendParticles(ParticleTypes.END_ROD, this.getX(), this.getY() + 1.0D, this.getZ(), 120, 5.0D, 1.0D, 5.0D, 0.15D);
         server.sendParticles(ParticleTypes.REVERSE_PORTAL, this.getX(), this.getY() + 2.0D, this.getZ(), 80, 4.0D, 2.0D, 4.0D, 0.2D);
-        server.playSound(null, this.blockPosition(), SoundEvents.GENERIC_EXPLODE, SoundSource.HOSTILE, 1.2F, 1.4F);
+        server.playSound(null, this.blockPosition(), ModSounds.REGULATOR_PULSE.get(), SoundSource.HOSTILE, 1.6F, 1.0F);
     }
 
     /** Atrae al objetivo lejano hacia el jefe. */
@@ -205,16 +206,16 @@ public class CosmosRegulatorEntity extends Monster {
     // ---- sonidos --------------------------------------------------------------
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENDER_DRAGON_HURT;
+        return ModSounds.REGULATOR_HURT.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENDER_DRAGON_DEATH;
+        return ModSounds.REGULATOR_DEATH.get();
     }
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.ENDERMAN_STARE;
+        return ModSounds.REGULATOR_AMBIENT.get();
     }
 }

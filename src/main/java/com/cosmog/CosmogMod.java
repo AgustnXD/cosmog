@@ -1,6 +1,7 @@
 package com.cosmog;
 
 import com.cosmog.registry.ModBlocks;
+import com.cosmog.registry.ModChunkGenerators;
 import com.cosmog.registry.ModCreativeTabs;
 import com.cosmog.registry.ModEntities;
 import com.cosmog.registry.ModItems;
@@ -20,5 +21,6 @@ public class CosmogMod {
         ModEntities.ENTITIES.register(bus);
         ModSounds.SOUNDS.register(bus);
         ModCreativeTabs.TABS.register(bus);
+        ModChunkGenerators.GENERATORS.register(bus);
     }
 }

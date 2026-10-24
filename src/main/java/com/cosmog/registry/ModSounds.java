@@ -24,4 +24,22 @@ public class ModSounds {
         return SOUNDS.register("music_disc." + name,
                 () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(CosmogMod.MODID, "music_disc." + name)));
     }
+
+    public static final RegistryObject<SoundEvent> MUSIC_UMBRA = SOUNDS.register("music.umbra",
+            () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(CosmogMod.MODID, "music.umbra")));
+
+    public static final RegistryObject<SoundEvent> REGULATOR_AMBIENT = sfx("regulator_ambient");
+    public static final RegistryObject<SoundEvent> REGULATOR_HURT = sfx("regulator_hurt");
+    public static final RegistryObject<SoundEvent> REGULATOR_DEATH = sfx("regulator_death");
+    public static final RegistryObject<SoundEvent> REGULATOR_PULSE = sfx("regulator_pulse");
+    public static final RegistryObject<SoundEvent> ANTI_AMBIENT = sfx("anti_ambient");
+    public static final RegistryObject<SoundEvent> ANTI_HURT = sfx("anti_hurt");
+    public static final RegistryObject<SoundEvent> ANTI_DEATH = sfx("anti_death");
+    public static final RegistryObject<SoundEvent> ANTI_PULSE = sfx("anti_pulse");
+    public static final RegistryObject<SoundEvent> STALKER_AMBIENT = sfx("stalker_ambient");
+    public static final RegistryObject<SoundEvent> SCREAMER_SCREAM = sfx("screamer_scream");
+
+    private static RegistryObject<SoundEvent> sfx(String name) {
+        return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(CosmogMod.MODID, name)));
+    }
 }

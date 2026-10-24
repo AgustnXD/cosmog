@@ -1,5 +1,6 @@
 package com.cosmog.block;
 
+import com.cosmog.registry.ModDimensions;
 import com.cosmog.util.CosmogTeleporter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -24,7 +25,7 @@ public class CosmicGatewayBlock extends Block {
             return InteractionResult.SUCCESS;
         }
         if (player instanceof ServerPlayer sp) {
-            CosmogTeleporter.travel(sp);
+            CosmogTeleporter.travel(sp, ModDimensions.COSMOG);
         }
         return InteractionResult.CONSUME;
     }
