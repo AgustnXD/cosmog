@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cosmog:void_fragment"
+    },
+    {
+      "item": "cosmog:void_fragment"
+    },
+    {
+      "item": "cosmog:void_fragment"
+    },
+    {
+      "item": "cosmog:void_fragment"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  ],
+  "result": {
+    "item": "cosmog:dark_ingot"
+  }
+}

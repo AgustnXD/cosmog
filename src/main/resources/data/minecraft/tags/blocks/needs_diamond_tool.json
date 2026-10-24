@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "cosmog:cosmic_gateway"
+    "cosmog:cosmic_gateway",
+    "cosmog:umbra_gateway"
   ]
 }

@@ -2,6 +2,11 @@
   "replace": false,
   "values": [
     "cosmog:stardust_ore",
-    "cosmog:cosmic_gateway"
+    "cosmog:cosmic_gateway",
+    "cosmog:dark_tiles",
+    "cosmog:dark_floor_tiles",
+    "cosmog:dim_lamp",
+    "cosmog:hidden_cache",
+    "cosmog:umbra_gateway"
   ]
 }

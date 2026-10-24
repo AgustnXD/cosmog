@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "cosmog:eclipse_template"
+  },
+  "base": {
+    "item": "cosmog:astral_sword"
+  },
+  "addition": {
+    "item": "cosmog:void_sword"
+  },
+  "result": {
+    "item": "cosmog:eclipse_blade"
+  }
+}
