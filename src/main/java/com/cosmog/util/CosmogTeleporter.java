@@ -1,6 +1,8 @@
 package com.cosmog.util;
 
 import com.cosmog.entity.AdeEntity;
+import com.cosmog.entity.TrueAdeEntity;
+import net.minecraft.world.entity.TamableAnimal;
 import com.cosmog.registry.ModBlocks;
 import com.cosmog.registry.ModDimensions;
 import com.cosmog.registry.ModItems;
@@ -37,8 +39,8 @@ public class CosmogTeleporter {
             return false;
         }
         ServerLevel from = sp.serverLevel();
-        List<AdeEntity> pets = from.getEntitiesOfClass(AdeEntity.class, sp.getBoundingBox().inflate(24.0D),
-                ade -> ade.isOwnedBy(sp) && !ade.isOrderedToSit());
+        List<TamableAnimal> pets = from.getEntitiesOfClass(TamableAnimal.class, sp.getBoundingBox().inflate(24.0D),
+                pet -> (pet instanceof AdeEntity || pet instanceof TrueAdeEntity) && pet.isOwnedBy(sp) && !pet.isOrderedToSit());
 
         if (from.dimension() == target) {
             ServerLevel dest = server.getLevel(sp.getRespawnDimension());
@@ -66,7 +68,7 @@ public class CosmogTeleporter {
 
         ServerLevel now = sp.serverLevel();
         if (now != from) {   // Ade viaja contigo
-            for (AdeEntity pet : pets) {
+            for (TamableAnimal pet : pets) {
                 Entity moved = pet.changeDimension(now);
                 if (moved != null) {
                     moved.moveTo(sp.getX() + 1.0D, sp.getY(), sp.getZ() + 1.0D);
@@ -89,9 +91,9 @@ public class CosmogTeleporter {
     // ------------------------------------------------------------------ The Umbra
     private static void arriveUmbra(ServerPlayer sp, ServerLevel level) {
         level.getChunk(0, 0);   // genera la sala de llegada
-        BlockPos gate = new BlockPos(18, PoolroomsGenerator.FY + 1, 16);
+        BlockPos gate = new BlockPos(12, PoolroomsGenerator.FY + 1, 10);
         level.setBlockAndUpdate(gate, ModBlocks.UMBRA_GATEWAY.get().defaultBlockState());
-        sp.teleportTo(level, 16.5D, PoolroomsGenerator.FY + 1.0D, 16.5D, 90.0F, 0.0F);
+        sp.teleportTo(level, 10.5D, PoolroomsGenerator.FY + 1.0D, 10.5D, 90.0F, 0.0F);
     }
 
     // ------------------------------------------------------------------ The Cosmog

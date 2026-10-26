@@ -6,6 +6,7 @@ import com.cosmog.entity.AntiRegulatorEntity;
 import com.cosmog.entity.CosmosRegulatorEntity;
 import com.cosmog.entity.ScreamerEntity;
 import com.cosmog.entity.StalkerEntity;
+import com.cosmog.entity.TrueAdeEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.registries.DeferredRegister;
@@ -39,7 +40,7 @@ public class ModEntities {
     public static final RegistryObject<EntityType<StalkerEntity>> STALKER = ENTITIES.register(
             "stalker",
             () -> EntityType.Builder.of(StalkerEntity::new, MobCategory.MONSTER)
-                    .sized(0.6F, 2.4F).clientTrackingRange(10)
+                    .sized(0.8F, 3.6F).clientTrackingRange(12)
                     .build(CosmogMod.MODID + ":stalker"));
 
     public static final RegistryObject<EntityType<ScreamerEntity>> SCREAMER = ENTITIES.register(
@@ -47,4 +48,10 @@ public class ModEntities {
             () -> EntityType.Builder.of(ScreamerEntity::new, MobCategory.MONSTER)
                     .sized(0.6F, 1.95F).clientTrackingRange(10)
                     .build(CosmogMod.MODID + ":screamer"));
+
+    public static final RegistryObject<EntityType<TrueAdeEntity>> TRUE_ADE = ENTITIES.register(
+            "true_ade",
+            () -> EntityType.Builder.of(TrueAdeEntity::new, MobCategory.CREATURE)
+                    .sized(0.6F, 1.8F).fireImmune().clientTrackingRange(10)
+                    .build(CosmogMod.MODID + ":true_ade"));
 }

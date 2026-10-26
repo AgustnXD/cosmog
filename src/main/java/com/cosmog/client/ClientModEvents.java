@@ -6,8 +6,8 @@ import com.cosmog.entity.AntiRegulatorEntity;
 import com.cosmog.entity.CosmosRegulatorEntity;
 import com.cosmog.entity.ScreamerEntity;
 import com.cosmog.entity.StalkerEntity;
+import com.cosmog.entity.TrueAdeEntity;
 import com.cosmog.registry.ModEntities;
-import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -41,14 +41,9 @@ public class ClientModEvents {
                 tex("ade"), 0.93F, 0.93F, 0.93F, DISK_WHITE);
     }
 
-    private static StyledHumanoidRenderer<StalkerEntity, HumanoidModel<StalkerEntity>> stalker(EntityRendererProvider.Context ctx) {
-        return new StyledHumanoidRenderer<>(ctx, new HumanoidModel<>(ctx.bakeLayer(ModelLayers.ZOMBIE)), 0.4F,
-                tex("stalker"), 0.95F, 1.28F, 0.95F, null);
-    }
-
-    private static StyledHumanoidRenderer<ScreamerEntity, ArmsUpModel<ScreamerEntity>> screamer(EntityRendererProvider.Context ctx) {
-        return new StyledHumanoidRenderer<>(ctx, new ArmsUpModel<>(ctx.bakeLayer(ModelLayers.ZOMBIE)), 0.4F,
-                tex("screamer"), 0.92F, 1.05F, 0.92F, null);
+    private static StyledHumanoidRenderer<TrueAdeEntity, TrueAdeModel> trueAde(EntityRendererProvider.Context ctx) {
+        return new StyledHumanoidRenderer<>(ctx, new TrueAdeModel(ctx.bakeLayer(TrueAdeModel.LAYER)), 0.5F,
+                tex("true_ade"), 1.0F, 1.0F, 1.0F, null);
     }
 
     @SubscribeEvent
@@ -56,13 +51,17 @@ public class ClientModEvents {
         event.registerEntityRenderer(ModEntities.COSMOS_REGULATOR.get(), ClientModEvents::regulator);
         event.registerEntityRenderer(ModEntities.ANTI_REGULATOR.get(), ClientModEvents::anti);
         event.registerEntityRenderer(ModEntities.ADE.get(), ClientModEvents::ade);
-        event.registerEntityRenderer(ModEntities.STALKER.get(), ClientModEvents::stalker);
-        event.registerEntityRenderer(ModEntities.SCREAMER.get(), ClientModEvents::screamer);
+        event.registerEntityRenderer(ModEntities.STALKER.get(), StalkerRenderer::new);
+        event.registerEntityRenderer(ModEntities.TRUE_ADE.get(), ClientModEvents::trueAde);
+        event.registerEntityRenderer(ModEntities.SCREAMER.get(), ScreamerRenderer::new);
     }
 
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(AccretionDiskLayer.LAYER, AccretionDiskLayer::createLayer);
+        event.registerLayerDefinition(StalkerModel.LAYER, StalkerModel::createLayer);
+        event.registerLayerDefinition(ScreamerModel.LAYER, ScreamerModel::createLayer);
+        event.registerLayerDefinition(TrueAdeModel.LAYER, TrueAdeModel::createLayer);
     }
 
     /** Cielo galactico: dimension_type "effects": "cosmog:galaxy" */

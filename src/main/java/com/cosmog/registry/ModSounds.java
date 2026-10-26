@@ -38,6 +38,8 @@ public class ModSounds {
     public static final RegistryObject<SoundEvent> ANTI_PULSE = sfx("anti_pulse");
     public static final RegistryObject<SoundEvent> STALKER_AMBIENT = sfx("stalker_ambient");
     public static final RegistryObject<SoundEvent> SCREAMER_SCREAM = sfx("screamer_scream");
+    public static final RegistryObject<SoundEvent> STALKER_STEP = sfx("stalker_step");
+    public static final RegistryObject<SoundEvent> STALKER_WHISPER = sfx("stalker_whisper");
 
     private static RegistryObject<SoundEvent> sfx(String name) {
         return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(CosmogMod.MODID, name)));

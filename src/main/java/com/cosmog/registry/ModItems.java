@@ -2,7 +2,7 @@ package com.cosmog.registry;
 
 import com.cosmog.CosmogMod;
 import com.cosmog.item.AmuletItem;
-import com.cosmog.item.AdeSoulItem;
+import com.cosmog.item.TrueAdeSoulItem;
 import com.cosmog.item.AstralArmorMaterial;
 import com.cosmog.item.EclipseArmorMaterial;
 import com.cosmog.item.EclipseTier;
@@ -131,7 +131,9 @@ public class ModItems {
     public static final RegistryObject<Item> ECLIPSE_TEMPLATE = ITEMS.register("eclipse_template",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> ADE_SOUL = ITEMS.register("ade_soul",
-            () -> new AdeSoulItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
+            () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
+    public static final RegistryObject<Item> TRUE_ADE_SOUL = ITEMS.register("true_ade_soul",
+            () -> new TrueAdeSoulItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> UMBRA_KEY = ITEMS.register("umbra_key",
             () -> new UmbraKeyItem(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
     public static final RegistryObject<Item> RIFT_COMPASS = ITEMS.register("rift_compass",
@@ -176,6 +178,8 @@ public class ModItems {
             () -> new BlockItem(ModBlocks.DARK_FLOOR_TILES.get(), new Item.Properties()));
     public static final RegistryObject<Item> DIM_LAMP = ITEMS.register("dim_lamp",
             () -> new BlockItem(ModBlocks.DIM_LAMP.get(), new Item.Properties()));
+    public static final RegistryObject<Item> DIM_LAMP_OFF = ITEMS.register("dim_lamp_off",
+            () -> new BlockItem(ModBlocks.DIM_LAMP_OFF.get(), new Item.Properties()));
     public static final RegistryObject<Item> HIDDEN_CACHE = ITEMS.register("hidden_cache",
             () -> new BlockItem(ModBlocks.HIDDEN_CACHE.get(), new Item.Properties()));
     public static final RegistryObject<Item> UMBRA_GATEWAY = ITEMS.register("umbra_gateway",
@@ -190,4 +194,7 @@ public class ModItems {
             () -> new ForgeSpawnEggItem(ModEntities.STALKER, 0x050505, 0xE8E8F0, new Item.Properties()));
     public static final RegistryObject<Item> SCREAMER_SPAWN_EGG = ITEMS.register("screamer_spawn_egg",
             () -> new ForgeSpawnEggItem(ModEntities.SCREAMER, 0xBEBEB6, 0x000000, new Item.Properties()));
+
+    public static final RegistryObject<Item> TRUE_ADE_SPAWN_EGG = ITEMS.register("true_ade_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.TRUE_ADE, 0xF4AAC6, 0xA0D0EE, new Item.Properties()));
 }

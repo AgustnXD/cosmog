@@ -1,18 +1,15 @@
 package com.cosmog.entity;
 
 import com.cosmog.registry.ModSounds;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
@@ -25,29 +22,30 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * Stalker: solo ataca cuando le das la espalda. Si lo miras antes de que te golpee, huye corriendo y desaparece.
+ * El Acechador: criatura alta y esqueletica, muy fuerte (como un "dweller"), pero le aterra la mirada.
+ * - Te sigue solo mientras NO lo miras. Al acercarse: susurros y pisadas pesadas.
+ * - Si lo miras, huye corriendo y desaparece. Si te alcanza de espaldas, golpea con muchisima fuerza.
  */
 public class StalkerEntity extends Monster {
     private int fleeTicks = 0;
     private int fleeRepath = 0;
     private int attackCooldown = 0;
+    private int stepCooldown = 0;
+    private int whisperCooldown = 60;
 
     public StalkerEntity(EntityType<? extends Monster> type, Level level) {
         super(type, level);
-        this.xpReward = 10;
+        this.xpReward = 50;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 60.0D)
+                .add(Attributes.MAX_HEALTH, 250.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.30D)
-                .add(Attributes.ATTACK_DAMAGE, 12.0D)
-                .add(Attributes.FOLLOW_RANGE, 32.0D);
-    }
-
-    public static boolean checkSpawn(EntityType<StalkerEntity> type, ServerLevelAccessor level, MobSpawnType reason,
-                                     BlockPos pos, RandomSource random) {
-        return Mob.checkMobSpawnRules(type, level, reason, pos, random) && random.nextInt(5) == 0;
+                .add(Attributes.ATTACK_DAMAGE, 16.0D)
+                .add(Attributes.ARMOR, 10.0D)
+                .add(Attributes.KNOCKBACK_RESISTANCE, 0.8D)
+                .add(Attributes.FOLLOW_RANGE, 48.0D);
     }
 
     @Override
@@ -60,7 +58,11 @@ public class StalkerEntity extends Monster {
     private boolean isSeenBy(Player player) {
         Vec3 look = player.getViewVector(1.0F).normalize();
         Vec3 toMe = new Vec3(this.getX() - player.getX(), this.getEyeY() - player.getEyeY(), this.getZ() - player.getZ()).normalize();
-        return look.dot(toMe) > 0.45D && player.hasLineOfSight(this) && this.distanceToSqr(player) < 40.0D * 40.0D;
+        return look.dot(toMe) > 0.55D && player.hasLineOfSight(this) && this.distanceToSqr(player) < 40.0D * 40.0D;
+    }
+
+    public boolean isFleeing() {
+        return this.fleeTicks > 0;
     }
 
     @Override
@@ -71,18 +73,18 @@ public class StalkerEntity extends Monster {
         }
         LivingEntity target = this.getTarget();
 
-        if (this.fleeTicks > 0) {   // huyendo: desaparece al terminar
+        if (this.fleeTicks > 0) {   // huye y desaparece
             this.fleeTicks--;
             if (target != null && --this.fleeRepath <= 0) {
                 Vec3 away = DefaultRandomPos.getPosAway(this, 24, 10, target.position());
                 if (away != null) {
-                    this.getNavigation().moveTo(away.x, away.y, away.z, 1.7D);
+                    this.getNavigation().moveTo(away.x, away.y, away.z, 1.9D);
                 }
-                this.fleeRepath = 15;
+                this.fleeRepath = 12;
             }
             if (this.fleeTicks == 0) {
                 if (this.level() instanceof ServerLevel server) {
-                    server.sendParticles(ParticleTypes.SMOKE, this.getX(), this.getY() + 1.0D, this.getZ(), 30, 0.3D, 0.8D, 0.3D, 0.02D);
+                    server.sendParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY() + 1.5D, this.getZ(), 40, 0.4D, 1.2D, 0.4D, 0.02D);
                 }
                 this.discard();
             }
@@ -92,15 +94,34 @@ public class StalkerEntity extends Monster {
         if (!(target instanceof Player player) || !player.isAlive()) {
             return;
         }
-        if (this.isSeenBy(player)) {
-            this.fleeTicks = 100;
+        double distance = Math.sqrt(this.distanceToSqr(player));
+
+        if (this.isSeenBy(player)) {   // la mirada le da miedo
+            this.fleeTicks = 110;
             this.fleeRepath = 0;
+            this.playSound(ModSounds.STALKER_AMBIENT.get(), 1.4F, 0.6F);
             return;
         }
-        this.getNavigation().moveTo(player, 1.25D);   // se acerca mientras no lo mires
-        if (this.distanceToSqr(player) < 3.0D && this.attackCooldown <= 0) {
-            player.hurt(this.damageSources().mobAttack(this), 12.0F);
-            this.attackCooldown = 40;
+
+        this.getNavigation().moveTo(player, distance < 12.0D ? 1.65D : 1.35D);   // se acerca mientras no lo mires
+
+        // anuncia su llegada: susurros y pisadas fuertes
+        if (distance < 32.0D && --this.whisperCooldown <= 0) {
+            this.playSound(ModSounds.STALKER_WHISPER.get(), 1.3F, 0.85F + this.random.nextFloat() * 0.3F);
+            this.whisperCooldown = 90 + this.random.nextInt(120);
+        }
+        if (distance < 30.0D && this.onGround() && this.getDeltaMovement().horizontalDistanceSqr() > 0.0004D && --this.stepCooldown <= 0) {
+            this.playSound(ModSounds.STALKER_STEP.get(), (float) Math.max(0.5D, 2.0D - distance / 18.0D), 0.8F + this.random.nextFloat() * 0.3F);
+            this.stepCooldown = distance < 10.0D ? 7 : 12;
+        }
+
+        if (distance < 3.6D && this.attackCooldown <= 0) {
+            if (player.hurt(this.damageSources().mobAttack(this), 16.0F)) {
+                player.knockback(1.6D, this.getX() - player.getX(), this.getZ() - player.getZ());
+                player.hurtMarked = true;
+                player.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 100, 0, false, false));
+            }
+            this.attackCooldown = 60;
         }
     }
 
@@ -116,6 +137,6 @@ public class StalkerEntity extends Monster {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.PHANTOM_DEATH;
+        return SoundEvents.WARDEN_DEATH;
     }
 }

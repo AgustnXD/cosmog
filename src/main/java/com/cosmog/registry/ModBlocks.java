@@ -43,6 +43,8 @@ public class ModBlocks {
             () -> new Block(tileProps()));
     public static final RegistryObject<Block> DIM_LAMP = BLOCKS.register("dim_lamp",
             () -> new Block(tileProps().lightLevel(s -> 8)));
+    public static final RegistryObject<Block> DIM_LAMP_OFF = BLOCKS.register("dim_lamp_off",
+            () -> new Block(tileProps()));
     /** Se ve identico a los azulejos oscuros; al clic derecho suelta un poco de comida. */
     public static final RegistryObject<Block> HIDDEN_CACHE = BLOCKS.register("hidden_cache",
             () -> new HiddenCacheBlock(tileProps()));

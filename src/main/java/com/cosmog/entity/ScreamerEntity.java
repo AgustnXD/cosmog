@@ -38,7 +38,7 @@ public class ScreamerEntity extends Monster {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.42D)
-                .add(Attributes.ATTACK_DAMAGE, 7.0D)
+                .add(Attributes.ATTACK_DAMAGE, 6.0D)
                 .add(Attributes.FOLLOW_RANGE, 30.0D);
     }
 
@@ -75,7 +75,7 @@ public class ScreamerEntity extends Monster {
         }
         this.getNavigation().moveTo(player, 1.7D);
         if (this.distanceToSqr(player) < 3.2D) {   // un golpe y se va
-            player.hurt(this.damageSources().mobAttack(this), 7.0F);
+            player.hurt(this.damageSources().mobAttack(this), 6.0F);   // 3 corazones sin armadura
             player.knockback(1.0D, this.getX() - player.getX(), this.getZ() - player.getZ());
             player.hurtMarked = true;
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false));

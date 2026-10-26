@@ -5,6 +5,7 @@ import com.cosmog.registry.ModDimensions;
 import com.cosmog.registry.ModEntities;
 import com.cosmog.registry.ModItems;
 import com.cosmog.util.CosmogTeleporter;
+import com.cosmog.util.UmbraHaunting;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
@@ -34,7 +35,7 @@ public class ModEvents {
             return;
         }
         EntityType<?> type = mob.getType();
-        if (type == ModEntities.ADE.get()) {
+        if (type == ModEntities.ADE.get() || type == ModEntities.TRUE_ADE.get()) {
             return;
         }
         var dimension = event.getLevel().dimension();
@@ -62,11 +63,13 @@ public class ModEvents {
         if (event.phase != TickEvent.Phase.END || event.side.isClient()) {
             return;
         }
-        if (event.player instanceof ServerPlayer sp
-                && sp.level().dimension() == ModDimensions.COSMOG
-                && sp.tickCount % 10 == 0
-                && sp.getY() < 8.0D) {
+        if (!(event.player instanceof ServerPlayer sp)) {
+            return;
+        }
+        if (sp.level().dimension() == ModDimensions.COSMOG && sp.tickCount % 10 == 0 && sp.getY() < 8.0D) {
             CosmogTeleporter.rescue(sp);
+        } else if (sp.level().dimension() == ModDimensions.UMBRA) {
+            UmbraHaunting.tick(sp);
         }
     }
 
