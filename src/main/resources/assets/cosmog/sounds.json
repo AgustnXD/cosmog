@@ -124,5 +124,19 @@
         "name": "cosmog:screamer_scream"
       }
     ]
+  },
+  "stalker_step": {
+    "sounds": [
+      {
+        "name": "cosmog:stalker_step"
+      }
+    ]
+  },
+  "stalker_whisper": {
+    "sounds": [
+      {
+        "name": "cosmog:stalker_whisper"
+      }
+    ]
   }
 }
