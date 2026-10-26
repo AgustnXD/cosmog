@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "III",
+    "I I"
+  ],
+  "key": {
+    "I": {
+      "item": "cosmog:dark_ingot"
+    }
+  },
+  "result": {
+    "item": "cosmog:void_helmet",
+    "count": 1
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "cosmog:the_cosmog",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "cosmog:cosmic_islands",
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "cosmog:cosmog_fields"
+    }
+  }
+}

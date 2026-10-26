@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "cosmog:eclipse_template"
+  },
+  "base": {
+    "item": "cosmog:astral_leggings"
+  },
+  "addition": {
+    "item": "cosmog:void_leggings"
+  },
+  "result": {
+    "item": "cosmog:eclipse_leggings"
+  }
+}

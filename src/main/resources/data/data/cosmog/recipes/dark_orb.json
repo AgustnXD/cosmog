@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " V ",
+    "VCV",
+    " V "
+  ],
+  "key": {
+    "V": {
+      "item": "cosmog:void_fragment"
+    },
+    "C": {
+      "item": "cosmog:corrupt_core"
+    }
+  },
+  "result": {
+    "item": "cosmog:dark_orb",
+    "count": 1
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "cosmog:music_disc_cosmog",
+    "cosmog:music_disc_starfall",
+    "cosmog:music_disc_nebula",
+    "cosmog:music_disc_event_horizon"
+  ]
+}

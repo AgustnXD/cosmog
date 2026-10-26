@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": {
+    "item": "cosmog:eclipse_template"
+  },
+  "base": {
+    "item": "cosmog:astral_helmet"
+  },
+  "addition": {
+    "item": "cosmog:void_helmet"
+  },
+  "result": {
+    "item": "cosmog:eclipse_helmet"
+  }
+}

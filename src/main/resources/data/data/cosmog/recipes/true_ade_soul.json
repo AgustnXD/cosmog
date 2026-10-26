@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "cosmog:ade_soul"
+    },
+    {
+      "item": "cosmog:cosmic_core"
+    },
+    {
+      "item": "cosmog:corrupt_core"
+    }
+  ],
+  "result": {
+    "item": "cosmog:true_ade_soul"
+  }
+}

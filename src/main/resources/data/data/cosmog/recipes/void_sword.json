@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " I ",
+    "ICI",
+    " S "
+  ],
+  "key": {
+    "I": {
+      "item": "cosmog:dark_ingot"
+    },
+    "C": {
+      "item": "cosmog:corrupt_core"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "cosmog:void_sword",
+    "count": 1
+  }
+}
